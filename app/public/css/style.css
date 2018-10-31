@@ -1,0 +1,92 @@
+body {
+  background-image: url("../images/friends1.JPG");
+  height: 100%;
+  margin: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.jumbotron {
+  background-color: #d3d2cf;
+  padding: 20px 20px;
+}
+
+.display-4 {
+  /* font-family: "Biryani", sans-serif; */
+  /* font-family: "Kavoon", cursive; */
+  /* font-family: "Cinzel", serif; */
+  font-family: "Exo", sans-serif;
+  font-size: 450%;
+  text-align: center;
+}
+
+.lead {
+  font-family: "Exo", sans-serif;
+  font-weight: 100;
+  font-size: 150%;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #e3b793;
+  color: black;
+  border-color: #e3b793;
+  margin: 10px 45%;
+}
+.btn:hover {
+  background-color: #818781;
+  border-color: #818781;
+}
+.container {
+  margin: 0 0;
+  justify-content: right;
+}
+a {
+  color: white;
+}
+a:hover {
+  color: #818781;
+}
+.foot {
+  color: white;
+}
+.formContainer {
+  width: 75%;
+  margin: 0 auto;
+}
+.formBox {
+  width: 100%;
+  margin: 20px 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+h3 {
+  font-family: "Exo", sans-serif;
+  font-weight: 100;
+  font-size: 150%;
+  margin: 7px 0;
+  color: white;
+}
+h4 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 100;
+  font-size: 18px;
+  margin: 7px 0;
+  color: white;
+}
+.btn-secondary {
+  background-color: #e3b793;
+  color: black;
+  border-color: #e3b793;
+}
+.btn-block {
+  margin-bottom: 20px;
+}
+.footer-home {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: left;
+}
