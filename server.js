@@ -2,6 +2,7 @@
 // neccessary npm packages
 var express = require("express");
 var path = require("path");
+var bodyParser = require("body-parser");
 
 // EXPRESS CONFIGURATION
 // This sets up the basic properties for the express server
@@ -15,6 +16,7 @@ var PORT = process.env.PORT || 8080;
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(express.static(__dirname + "/app/public/"));
 // OR
 // Sets up the Express app to handle data parsing
 // app.use(express.urlencoded({ extended: true }));
@@ -22,8 +24,8 @@ app.use(bodyParser.json());
 
 // ROUTER
 // The below points our server to a series of "route" files
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+require("./app/routing/apiRoutes")(app);
+require("./app/routing/htmlRoutes")(app);
 
 // LISTENER
 // The below code effectively "starts" the server

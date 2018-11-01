@@ -20,9 +20,13 @@ module.exports = function(app) {
     // Then the server saves the data to the friends array
 
     app.post("/api/friends", function(req, res) {
+        console.log("here it is: " + req.body);
         friendsData.push(req.body);
         res.json(true);
     });
+
+    // Determine friend compatibility
+// let user = req.body;
 
     // Code to clear out the table for testing
     app.post("/api/clear", function() {
