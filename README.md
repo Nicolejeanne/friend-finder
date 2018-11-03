@@ -6,4 +6,4 @@ I am currently a student in the UT Austin Coding Bootcamp. after spending a few 
 
 ## Try it out
 
-![friend-finder app](https://vast-river-10322.herokuapp.com/)
+[friend-finder app](https://vast-river-10322.herokuapp.com/)
