@@ -21,17 +21,35 @@ module.exports = function(app) {
 
     app.post("/api/friends", function(req, res) {
         console.log("here it is: " + req.body);
-        friendsData.push(req.body);
-        res.json(true);
+
+// Get user info
+let newUser = req.body;
+
+// Set minimum difference high as starting point for answer comparison, default friend match
+let bestMatchIndex = 0;
+let minDiff = 1000;
+
+// in this for-loop, start off with a zero difference and compare the user and the friend scores, one set at a time
+    //  whatever the difference is, add to the total difference
+    for(let i = 0; i < friendsData.length; i++) {
+        let totalDiff = 0;
+        for(let j = 0; j < friendsData[i].scores.length; j++) {
+          let difference = Math.abs(newUser.scores[j] - friendsData[i].scores[j]);
+          totalDiff += difference;
+        }
+
+        // if there is a new minimum, change the best friend index and set the new minimum for next iteration comparisons
+      if(totalDiff < minDiff) {
+        bestMatchIndex = i;
+        minDiff = totalDiff;
+      }
+
+// after finding match, add user to friend array
+        friendsData.push(newUser);
+
+      // send back to browser the best friend match  
+        res.json(friendsData[bestMatchIndex]);
+    };
+
     });
-
-    // Determine friend compatibility
-// let user = req.body;
-
-    // Code to clear out the table for testing
-    app.post("/api/clear", function() {
-        // Empty out the arrays of data
-        friendsData = [];
-        console.log(friendsData);
-      });
 }

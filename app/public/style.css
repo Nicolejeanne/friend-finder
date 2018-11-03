@@ -1,5 +1,5 @@
 body {
-  background-image: url("../images/friends1.JPG");
+  background-image: url("./images/friends1.JPG");
   height: 100%;
   margin: 0;
   background-position: center;
@@ -79,6 +79,7 @@ h4 {
   background-color: #e3b793;
   color: black;
   border-color: #e3b793;
+  width: 15%;
 }
 .btn-block {
   margin-bottom: 20px;
