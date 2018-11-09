@@ -17,6 +17,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.css" rel="stylesheet">
     <!-- Unique style sheet -->
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js"></script>
     <title>Survey</title>
 </head>
 
@@ -28,13 +37,14 @@
     </div>
 
     <!-- Form -->
+    <form>
     <div class="formContainer">
         <h3>About You</h3>
         <h4>Name (Required)</h4>
         <input type="text" name="" id="friend-name" class="form-control" required="">
         <h4>Link to Photo Image (Required)</h4>
         <input type="link" name="" id="photo-link" class="form-control" required="">
-
+    </form>
         <div class="container-fluid">
             <div class="row">
                 <div class="formBox">
@@ -140,7 +150,7 @@
                     </select>
                 </div>
                 <button class="btn btn-secondary btn-lg btn-block submit-btn" type="submit" data-toggle="modal"
-                    data-target="#bestMatchModal" value="Submit">Submit</button>
+                    data-target="#resultsModal" value="Submit">Submit</button>
             </div>
         </div>
 
@@ -177,15 +187,7 @@
             </div>
         </footer>
 
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-            crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.js"></script>
+        
         <!-- BELOW CODE IS CRITICAL.
             IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
         <script type="text/javascript">
@@ -195,7 +197,17 @@
             // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
             // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
 
-
+// $(document).ready(function () {
+			// $('select').material_select();
+			// $('.modal').modal({
+				// dismissible: false,
+				// opacity: .5, 
+				// inDuration: 300, 
+				// outDuration: 200, 
+				// startingTop: '4%',
+				// endingTop: '10%'
+			// });
+		// });
             // Dropdown menu functionality
             var config = {
                 '.chosen-select': {},
@@ -245,27 +257,20 @@
 
                     console.log(newFriend);
 
-                    let currentURL = window.location.origin;
+                    // let currentURL = window.location.origin;
 
                     // Post the data to the API
-                    $.post(currentURL + "/api/friends", newFriend).done(
+                    $.post("/api/friends", newFriend).then(
                         function (data) {
 
                             // If a new friend was created, display back the best friend match.
-
+console.log(data);
                             // Grab the result from the AJAX post so that the best match's name and photo are displayed.
                             $("#matchName").text(data.name);
                             $('#matchImg').attr("src", data.photo);
 
                             // Show the modal with the best match 
-                            $(".modal").modal({
-                                dismissible: false,
-                                opacity: .5,
-                                inDuration: 300,
-                                outDuration: 200,
-                                startingTop: '4%',
-                                endingTop: '10%'
-                            });
+                            $("#resultsModal").modal("show");
 
                         });
                 }
