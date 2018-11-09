@@ -19,7 +19,7 @@ module.exports = function(app) {
   // Then the server saves the data to the friends array
 
   app.post("/api/friends", function(req, res) {
-    // console.log("here it is: " + req.body);
+    console.log(req.body);
 
     // Set minimum difference high as starting point for answer comparison, default friend match
     let bestMatch = {
@@ -57,6 +57,7 @@ module.exports = function(app) {
       friends.push(newUserInput);
 
     }
+    console.log(bestMatch);
     // send back to browser the best friend match
     res.json(bestMatch);
   });
