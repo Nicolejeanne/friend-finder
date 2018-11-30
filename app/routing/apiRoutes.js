@@ -1,7 +1,7 @@
 // LOAD DATA
 // Links routes to a series of "data" sources.
 // These data sources hold arrays of information on friends
-var friends = require("../data/friends");
+var friendsArray = require("../data/friends");
 
 // ROUTING
 module.exports = function(app) {
@@ -10,7 +10,7 @@ module.exports = function(app) {
   // When a user visits a link they are shown a JSON of the data
 
   app.get("/api/friends", function(req, res) {
-    res.json(friends);
+    res.json(friendsArray);
   });
 
   //   API POST Requests
@@ -21,6 +21,17 @@ module.exports = function(app) {
   app.post("/api/friends", function(req, res) {
     console.log(req.body);
 
+    // Set user info
+    let newUserInput = req.body;
+    console.log(newUserInput);
+    let newUserName = newUserInput.name;
+    console.log(newUserName);
+    let newUserPhoto = newUserInput.photo;
+    console.log(newUserPhoto);
+    let newUserScores = newUserInput.scores;
+    console.log(newUserScores);
+
+
     // Set minimum difference high as starting point for answer comparison, default friend match
     let bestMatch = {
       name: "",
@@ -28,35 +39,27 @@ module.exports = function(app) {
       friendDifference: 1000
     };
 
-    // Set user info
-    let newUserInput = req.body;
-    let newUserName = newUserInput.name;
-    let newUserPhoto = newUserInput.photo;
-    let newUserScores = newUserInput.scores;
-
     // in this for-loop, start off with a zero difference and compare the user and the friend scores, one set at a time
     //  whatever the difference is, add to the total difference
     // friend list loop
-    for (let i = 0; i < friends.length; i++) {
+    for (let i = 0; i < friendsArray.length; i++) {
       let totalDifference = 0;
       // score loop
-      for (let j = 0; j < friends[i].scores.length; j++) {
+      for (let j = 0; j < friendsArray[i].scores.length; j++) {
         totalDifference += Math.abs(
-          parseInt(
-            newUserScores[j] - parseInt(friends[i].scores[j])
-          )
+          parseInt(newUserScores[j] - parseInt(friendsArray[i].scores[j]))
         );
         if (totalDifference <= bestMatch.friendDifference) {
-          bestMatch.name = friends[i].name;
-          bestMatch.photo = friends[i].photo;
+          bestMatch.name = friendsArray[i].name;
+          bestMatch.photo = friendsArray[i].photo;
           bestMatch.friendDifference = totalDifference;
         }
       }
-
-      // after finding match, add user to friend array
-      friends.push(newUserInput);
-
     }
+
+    // after finding match, add user to friend array
+    friendsArray.push(newUserInput);
+    
     console.log(bestMatch);
     // send back to browser the best friend match
     res.json(bestMatch);
